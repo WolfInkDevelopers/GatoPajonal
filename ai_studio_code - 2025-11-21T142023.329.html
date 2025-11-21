@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gato de Pajonal Presentation</title>
+    
+    <!-- Google Fonts: Nunito (Redondo, legible, moderno) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-left: #ffffff;
+            --bg-right: #e0f7fa;
+            --primary: #00695C; /* Teal oscuro */
+            --secondary: #FF7043; /* Naranja suave */
+            --accent: #4DB6AC; /* Teal claro */
+            --text: #263238;
+            --box-bg: #f5f5f5;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            background: white;
+        }
+
+        /* --- SECCIÓN IZQUIERDA (TEXTO) --- */
+        .slide-content {
+            flex: 1.2; /* Un poco más ancho para que quepa la info */
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0 0 30px 0;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            animation: fadeDown 1s ease-out;
+        }
+
+        /* Grid para los datos rápidos */
+        .facts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .fact-item {
+            background: var(--box-bg);
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            border-left: 6px solid var(--secondary);
+            opacity: 0;
+            transform: translateX(-30px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .fact-item:hover {
+            transform: scale(1.03) translateX(5px);
+            background: #FFF3E0;
+        }
+
+        /* Caja para el párrafo largo */
+        .summary-box {
+            background-color: #E0F2F1;
+            border: 2px dashed var(--primary);
+            padding: 20px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: #004D40;
+            opacity: 0;
+            animation: fadeUp 1s 1.8s forwards; /* Aparece al final */
+        }
+
+        /* Animaciones de lista escalonadas */
+        .fact-item:nth-child(1) { animation: slideRight 0.6s 0.5s forwards; }
+        .fact-item:nth-child(2) { animation: slideRight 0.6s 0.7s forwards; }
+        .fact-item:nth-child(3) { animation: slideRight 0.6s 0.9s forwards; }
+        .fact-item:nth-child(4) { animation: slideRight 0.6s 1.1s forwards; }
+        .fact-item:nth-child(5) { animation: slideRight 0.6s 1.3s forwards; }
+        .fact-item:nth-child(6) { animation: slideRight 0.6s 1.5s forwards; }
+
+        /* --- SECCIÓN DERECHA (IMAGEN) --- */
+        .slide-visual {
+            flex: 0.8;
+            background-color: var(--bg-right);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%); /* Corte diagonal */
+        }
+
+        .main-image {
+            width: 85%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 30px;
+            box-shadow: 20px 20px 0 rgba(0, 105, 92, 0.2);
+            animation: floatImage 5s ease-in-out infinite;
+            object-fit: cover;
+        }
+
+        /* Decoración flotante */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: -1;
+        }
+        .b1 { width: 80px; height: 80px; top: 15%; right: 15%; animation: float 6s infinite; }
+        .b2 { width: 150px; height: 150px; bottom: 10%; right: 25%; animation: float 8s infinite reverse; }
+
+        /* Keyframes */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideRight {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body { flex-direction: column; overflow-y: auto; height: auto; }
+            .slide-visual { clip-path: none; height: 300px; width: 100%; order: -1; }
+            .slide-content { padding: 20px; width: 100%; box-sizing: border-box; }
+            .facts-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- IZQUIERDA: TEXTO E INFORMACIÓN -->
+    <div class="slide-content">
+        <h1>Gato de Pajonal</h1>
+        
+        <!-- Grid de datos (Tomados de la parte superior de tu imagen) -->
+        <div class="facts-grid">
+            <div class="fact-item">
+                <span>🥩</span> Type: <strong>Carnivore</strong>
+            </div>
+            <div class="fact-item">
+                <span>🏷️</span> Spanish Name: <strong>Gato Pajonal</strong>
+            </div>
+            <div class="fact-item">
+                <span>🐈</span> Distinctive Part: <strong>Tail</strong>
+            </div>
+            <div class="fact-item">
+                <span>🎨</span> Color: <strong>Gray</strong>
+            </div>
+            <div class="fact-item">
+                <span>🐿️</span> Food: <strong>Rabbits, squirrels & mice</strong>
+            </div>
+            <div class="fact-item">
+                <span>🌲</span> Habitat: <strong>Forests</strong>
+            </div>
+        </div>
+
+        <!-- Resumen (El texto de abajo de tu imagen) -->
+        <div class="summary-box">
+            "The Gato de Pajonal is a carnivore. It eats rabbits, squirrels, and mice. It lives in forests. It is gray and it has a tail."
+        </div>
+    </div>
+
+    <!-- DERECHA: IMAGEN -->
+    <div class="slide-visual">
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        
+        <!-- Imagen de gato montés gris similar al Gato Pajonal -->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO1dk1KZh4uG_0UQ-JF_v0_rK5ZBJkUEibLQ&s" alt="Gato de Pajonal" class="main-image">
+    </div>
+
+</body>
+</html>
